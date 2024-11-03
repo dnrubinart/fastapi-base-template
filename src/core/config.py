@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = ""
     SECRET_KEY: str = os.getenv("SECRET_KEY")
-    DATABASE_URI: str = os.getenv("DATABASE_URI")
+    DATABASE_URL: str = os.getenv("DATABASE_URL")
 
     class Config:
         case_sensitive = True
