@@ -1,9 +1,12 @@
+from contextlib import asynccontextmanager
+
 import uvicorn
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.v1.routes import api_router
 from core.config import Settings, settings
+from repositories.db_session import init_db
 
 
 class App:
@@ -15,9 +18,11 @@ class App:
             docs_url="/docs",
             redoc_url="/redoc",
             openapi_url="/openapi.json",
+            lifespan=self.lifespan,
         )
         self.__setup_middlewares(settings=settings)
         self.__setup_routes(settings=settings, router=api_router)
+        self.__setup_events()
 
     def __setup_middlewares(self, settings: Settings):
         self.__app.add_middleware(
@@ -30,6 +35,11 @@ class App:
 
     def __setup_routes(self, router: APIRouter, settings: Settings):
         self.__app.include_router(router, prefix=settings.API_V1_STR)
+
+    @asynccontextmanager
+    async def lifespan(self):
+        init_db()
+        yield
 
     def __call__(self):
         return self.__app
