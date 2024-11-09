@@ -1,5 +1,7 @@
 import uuid
-from uuid import UUID
+
+from sqlalchemy import Column
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import declarative_base, declarative_mixin, declared_attr
 
 Base = declarative_base()
@@ -12,8 +14,8 @@ class BaseMixin:
     All models should inherit from this class.
     """
 
-    uuid = UUID(
-        as_uuid=True,
+    uuid = Column(
+        UUID(as_uuid=True),
         primary_key=True,
         index=True,
         default=uuid.uuid4,

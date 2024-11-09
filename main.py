@@ -22,7 +22,6 @@ class App:
         )
         self.__setup_middlewares(settings=settings)
         self.__setup_routes(settings=settings, router=api_router)
-        self.__setup_events()
 
     def __setup_middlewares(self, settings: Settings):
         self.__app.add_middleware(
@@ -37,7 +36,7 @@ class App:
         self.__app.include_router(router, prefix=settings.API_V1_STR)
 
     @asynccontextmanager
-    async def lifespan(self):
+    async def lifespan(self, app: FastAPI):
         init_db()
         yield
 
