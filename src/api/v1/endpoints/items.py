@@ -4,5 +4,5 @@ router = APIRouter()
 
 
 @router.get("/items/")
-def read_users():
+def read_items():
     pass

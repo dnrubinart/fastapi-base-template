@@ -5,7 +5,7 @@ from models.base import Base, BaseMixin
 class User(Base, BaseMixin):
     """
     Database model representing "users" table in the database.
-    Id and table name are inherited from BaseMixin.
+    UUID and table name are inherited from BaseMixin.
     """
 
     username = Column(String)

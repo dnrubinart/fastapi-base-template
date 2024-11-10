@@ -13,4 +13,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 def init_db():
+    """
+    Create all tables in the database.
+    """
     Base.metadata.create_all(bind=engine)
