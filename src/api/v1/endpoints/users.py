@@ -3,6 +3,6 @@ from fastapi import APIRouter
 router = APIRouter()
 
 
-@router.get("/users/")
+@router.get("/")
 def read_users():
     pass

@@ -4,9 +4,9 @@ import uvicorn
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.v1.routes import api_router
-from core.config import Settings, settings
-from repositories.db_session import init_db
+from src.api.v1.routes import api_router
+from src.core.config import Settings, settings
+from src.database.session import init_db
 
 
 class App:
