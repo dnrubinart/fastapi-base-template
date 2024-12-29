@@ -1,4 +1,5 @@
 import uuid
+import inflect
 
 from sqlalchemy import Column
 from sqlalchemy.dialects.postgresql import UUID
@@ -6,6 +7,7 @@ from sqlalchemy.orm import declarative_base, declarative_mixin, declared_attr
 
 Base = declarative_base()
 
+inflector = inflect.engine()
 
 @declarative_mixin
 class BaseMixin:
@@ -22,8 +24,10 @@ class BaseMixin:
         unique=True,
         nullable=False,
     )
-    __name__: str
 
     @declared_attr
     def __tablename__(cls) -> str:
-        return cls.__name__.lower()
+        """
+        Returns the pluralized class name as the table name.
+        """
+        return inflector.plural(cls.__name__.lower())
