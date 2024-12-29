@@ -37,7 +37,7 @@ class App:
 
     @asynccontextmanager
     async def lifespan(self, app: FastAPI):
-        init_db()
+        await init_db()
         yield
 
     def __call__(self):
